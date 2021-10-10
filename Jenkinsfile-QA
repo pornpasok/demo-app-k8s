@@ -44,7 +44,7 @@ pipeline {
             steps {
                 echo 'Deploy to QA ENV'
                 sh '''
-                    kubectl create deployment ${APP_NAME} -n ${DEV_PROJECT} --image=${DOCKER_USER}/${APP_NAME}
+                    kubectl create deployment ${APP_NAME} -n ${DEV_PROJECT} --image=${NEXUS_SERVER}:${NEXUS_SERVER_PULL_PORT}/${APP_NAME}:${APP_TAG}
                 '''
 
             }
