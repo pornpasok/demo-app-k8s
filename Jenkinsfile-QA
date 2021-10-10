@@ -1,0 +1,100 @@
+pipeline {
+    agent any
+    environment {
+        APP_GIT_URL = "https://github.com/pornpasok/demo-app-k8s.git"
+        APP_BRANCH = "main"
+        //APP_TAG = "latest"
+        APP_NAME = "demo-app-k8s"
+        APP_PORT = "3000"
+        DEV_PROJECT = "workshop-qa"
+        SQ_SERVER = "https://sq.7-11.io"
+        NEXUS_SERVER = "repository.7-11.io"
+        NEXUS_SERVER_PULL_PORT = "5000"
+        NEXUS_SERVER_PUSH_PORT = "5001"
+        DOMAIN_NAME = "7-11.tech"
+
+    }
+    
+    stages {
+        stage('Clean') {
+            steps {
+                echo 'Clean Workspace'
+                sh '''
+                    rm -rf *
+                '''
+                echo 'Clean Demo App'
+                sh '''
+                    if kubectl get deployment ${APP_NAME} -n ${DEV_PROJECT}; then echo exists && kubectl delete deployment ${APP_NAME} -n ${DEV_PROJECT} && kubectl delete svc ${APP_NAME} -n ${DEV_PROJECT}; else echo no deployment; fi
+                '''
+            }
+        }
+
+        stage('SCM') {
+            steps {
+                echo 'Pull code from SCM'
+                git(
+                    url: "${APP_GIT_URL}",
+                    //credentialsId: 'github-cicd',
+                    branch: "${APP_BRANCH}"
+                )
+            }
+        }
+
+        stage('Deploy to QA ENV') {
+            steps {
+                echo 'Deploy to QA ENV'
+                sh '''
+                    kubectl create deployment ${APP_NAME} -n ${DEV_PROJECT} --image=${DOCKER_USER}/${APP_NAME}
+                '''
+
+            }
+        }
+
+        stage('Expose Service to QA ENV') {
+            steps {
+                echo 'Expose Service to Dev ENV'
+                sh '''
+                    kubectl expose deployment ${APP_NAME} -n ${DEV_PROJECT} --type=LoadBalancer --port=80 --target-port=${APP_PORT}
+                '''
+
+            }
+        }
+
+        stage('Scale App') {
+            steps {
+                echo 'Scale App'
+                sh '''
+                    kubectl scale deployment ${APP_NAME} -n ${DEV_PROJECT} --replicas=2
+                '''
+            }
+        }
+
+        // stage('Get App Endpoint') {
+        //     steps {
+        //         echo 'Get App Endpoint'
+        //         sh '''
+        //             sleep 30
+        //             kubectl get service ${APP_NAME} -n ${DEV_PROJECT} | tail -n +2 | awk '{print $4}'
+        //             ELB_ENDPOINT=$(kubectl get service ${APP_NAME} -n ${DEV_PROJECT} | tail -n +2 | awk '{print $4}')
+        //             echo "ELB_ENDPOINT: http://$ELB_ENDPOINT"
+        //         '''
+        //     }
+        // }
+
+        stage('Check App') {
+            steps {
+                echo 'Check App'
+                sh '''
+                    sleep 30
+                    # AWS ELB
+                    #STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://$ELB_ENDPOINT)
+
+                    # Service
+                    STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://${APP_NAME}-${DEV_PROJECT}.${DOMAIN_NAME})
+                    if test $STATUSCODE -ne 200; then echo ERROR:$STATUSCODE && exit 1; else echo SUCCESS; fi;
+                '''
+            }
+        }
+
+    }
+}
