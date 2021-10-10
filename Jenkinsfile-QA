@@ -60,6 +60,32 @@ pipeline {
             }
         }
 
+        stage('Create Ingress') {
+            steps {
+                echo 'Create Ingress'
+                sh '''
+                    cat <<EOF | kubectl apply -f -
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ${APP_NAME}
+  namespace: ${DEV_PROJECT}
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: ${APP_NAME}-${DEV_PROJECT}.${DOMAIN_NAME}
+      http:
+        paths:
+          - backend:
+              serviceName: ${APP_NAME}
+              servicePort: 80
+EOF
+                '''
+
+            }
+        }
+
         stage('Scale App') {
             steps {
                 echo 'Scale App'
