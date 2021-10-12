@@ -38,3 +38,9 @@ https://k8slens.dev/
 kubectl get node
 ```
 - Open Lens add sds-eks-dev cluster
+
+## Ref:
+- DO280
+https://www.redhat.com/en/services/training/do280-red-hat-openshift-administration-II-operating-production-kubernetes-cluster
+- DO288
+https://www.redhat.com/en/services/training/do288-red-hat-openshift-development-ii-containerizing-applications
