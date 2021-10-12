@@ -4,7 +4,7 @@
 GitHub/GitLab + Jenkins + k8s (EKS)
 
 ### tono CI/CD v1 Overview
-![tono CI/CD v1](images/iam_v1.png)
+![tono CI/CD v1](images/tono_v1.png)
 
 - Jenkins: https://cicd.tono.io/
 - Nexus: https://repository.tono.io:8081/
