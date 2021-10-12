@@ -3,11 +3,14 @@
 ### Workshop Kubernetes (k8s) Demo App
 GitHub/GitLab + Jenkins + k8s (EKS)
 
-Jenkins: https://cicd.7-11.tech/
-Nexus: https://repository.7-11.io:8081/
-SonarQube: https://sq.7-11.io/
+### IAM CI/CD v1 Overview
+![IAM CI/CD v1](images/iam_v1.png)
 
-# Update kubeconfig EKS Dev
+- Jenkins: https://cicd.7-11.tech/
+- Nexus: https://repository.7-11.io:8081/
+- SonarQube: https://sq.7-11.io/
+
+### Update kubeconfig EKS Dev
 1.Install aws cli
 
 2.Install kubectl
