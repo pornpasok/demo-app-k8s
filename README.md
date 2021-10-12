@@ -9,6 +9,7 @@ GitHub/GitLab + Jenkins + k8s (EKS)
 - Jenkins: https://cicd.7-11.tech/
 - Nexus: https://repository.7-11.io:8081/
 - SonarQube: https://sq.7-11.io/
+- Monitoring: https://monitor-dev.7-11.tech/
 
 ### Update kubeconfig EKS Dev
 1.Install aws cli
