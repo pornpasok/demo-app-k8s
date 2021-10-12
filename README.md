@@ -3,8 +3,8 @@
 ### Workshop Kubernetes (k8s) Demo App
 GitHub/GitLab + Jenkins + k8s (EKS)
 
-### IAM CI/CD v1 Overview
-![IAM CI/CD v1](images/iam_v1.png)
+### tono CI/CD v1 Overview
+![tono CI/CD v1](images/iam_v1.png)
 
 - Jenkins: https://cicd.tono.io/
 - Nexus: https://repository.tono.io:8081/
@@ -39,7 +39,7 @@ kubectl get node
 ```
 - Open Lens add tono-eks-dev cluster
 
-## Ref:
+### Ref:
 - DO280
 https://www.redhat.com/en/services/training/do280-red-hat-openshift-administration-II-operating-production-kubernetes-cluster
 - DO288
