@@ -22,7 +22,7 @@ aws_access_key_id=xxx
 aws_secret_access_key=xxx
 ```
 
-4.Update kubeconfig (~/.kube/config)
+4.Update kubeconfig (~/.kube/config) with aws cli
 ```
 aws eks update-kubeconfig --name sds-eks-dev \
 --region ap-southeast-1 \
