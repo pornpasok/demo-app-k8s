@@ -69,9 +69,10 @@ pipeline {
                 echo 'Push Images to Artifactory'
                 withCredentials([usernamePassword(credentialsId: 'sds-nexus', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh '''
-                        # Docker Login
+                        # Docker Login Pull
                         echo docker login to ${NEXUS_SERVER}:${NEXUS_SERVER_PULL_PORT}
                         docker login ${NEXUS_SERVER}:${NEXUS_SERVER_PULL_PORT} -u $DOCKER_USER -p $DOCKER_PASSWORD 
+                        # Docker Login Push
                         echo docker login to ${NEXUS_SERVER}:${NEXUS_SERVER_PUSH_PORT}
                         docker login ${NEXUS_SERVER}:${NEXUS_SERVER_PUSH_PORT} -u $DOCKER_USER -p $DOCKER_PASSWORD 
             
