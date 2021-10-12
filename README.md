@@ -16,9 +16,11 @@ GitHub/GitLab + Jenkins + k8s (EKS)
 2.Install kubectl
 
 3.Insert aws credentials to ~/.aws/credentials
+```
 [sds-eks-dev-workshop]
 aws_access_key_id=xxx
 aws_secret_access_key=xxx
+```
 
 4.Update kubeconfig (~/.kube/config)
 aws eks update-kubeconfig --name sds-eks-dev --region ap-southeast-1 --profile sds-eks-dev-workshop
@@ -27,5 +29,7 @@ aws eks update-kubeconfig --name sds-eks-dev --region ap-southeast-1 --profile s
 https://k8slens.dev/
 
 6.Test 
-- kubectl get node
+```
+kubectl get node
+```
 - Open Lens add sds-eks-dev cluster
