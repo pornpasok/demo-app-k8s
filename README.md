@@ -1,6 +1,6 @@
 # demo-app-k8s
 
-### Workshop Kubernetes (k8s) Demo App
+### Workshop Kubernetes (EKS) Demo App
 GitHub/GitLab + Jenkins + k8s (EKS)
 
 ### tono CI/CD v1 Overview
