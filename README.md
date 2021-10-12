@@ -23,7 +23,9 @@ aws_secret_access_key=xxx
 ```
 
 4.Update kubeconfig (~/.kube/config)
+```
 aws eks update-kubeconfig --name sds-eks-dev --region ap-southeast-1 --profile sds-eks-dev-workshop
+```
 
 5.Install Lens (Options)
 https://k8slens.dev/
