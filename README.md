@@ -6,10 +6,10 @@ GitHub/GitLab + Jenkins + k8s (EKS)
 ### IAM CI/CD v1 Overview
 ![IAM CI/CD v1](images/iam_v1.png)
 
-- Jenkins: https://cicd.7-11.tech/
-- Nexus: https://repository.7-11.io:8081/
-- SonarQube: https://sq.7-11.io/
-- Monitoring: https://monitor-dev.7-11.tech/
+- Jenkins: https://cicd.tono.io/
+- Nexus: https://repository.tono.io:8081/
+- SonarQube: https://sq.tono.io/
+- Monitoring: https://monitor-dev.tono.io/
 
 ### Update kubeconfig EKS Dev
 1.Install aws cli
@@ -18,16 +18,16 @@ GitHub/GitLab + Jenkins + k8s (EKS)
 
 3.Insert aws credentials to ~/.aws/credentials
 ```
-[sds-eks-dev-workshop]
+[tono-eks-dev-workshop]
 aws_access_key_id=xxx
 aws_secret_access_key=xxx
 ```
 
 4.Update kubeconfig (~/.kube/config) with aws cli
 ```
-aws eks update-kubeconfig --name sds-eks-dev \
+aws eks update-kubeconfig --name tono-eks-dev \
 --region ap-southeast-1 \
---profile sds-eks-dev-workshop
+--profile tono-eks-dev-workshop
 ```
 
 5.Install Lens (Options)
@@ -37,7 +37,7 @@ https://k8slens.dev/
 ```
 kubectl get node
 ```
-- Open Lens add sds-eks-dev cluster
+- Open Lens add tono-eks-dev cluster
 
 ## Ref:
 - DO280

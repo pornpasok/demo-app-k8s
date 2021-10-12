@@ -7,11 +7,11 @@ pipeline {
         APP_NAME = "tono"
         APP_PORT = "3000"
         DEV_PROJECT = "workshop-qa"
-        SQ_SERVER = "https://sq.7-11.io"
-        NEXUS_SERVER = "repository.7-11.io"
+        SQ_SERVER = "https://sq.tono.io"
+        NEXUS_SERVER = "repository.tono.io"
         NEXUS_SERVER_PULL_PORT = "5000"
         NEXUS_SERVER_PUSH_PORT = "5001"
-        DOMAIN_NAME = "7-11.tech"
+        DOMAIN_NAME = "tono.io"
 
     }
     
