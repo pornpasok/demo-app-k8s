@@ -45,7 +45,7 @@ pipeline {
                 echo 'Source Code Scan SonarQube'
                 withCredentials([string(credentialsId: 'sq-token', variable: 'SQ_TOKEN')]) {
                     sh '''
-                        /sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
+                        sonar-scanner \
                         -Dsonar.projectKey="${APP_NAME}" \
                         -Dsonar.sources=. \
                         -Dsonar.host.url="${SQ_SERVER}" \
