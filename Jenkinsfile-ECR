@@ -4,7 +4,7 @@ pipeline {
         APP_GIT_URL = "https://github.com/pornpasok/demo-app-k8s.git"
         APP_BRANCH = "main"
         APP_TAG = "latest"
-        APP_NAME = "tono"
+        APP_NAME = "demo-app-k8s"
         APP_PORT = "3000"
         DEV_PROJECT = "dev"
         SQ_SERVER = "https://sq.tono.io"
