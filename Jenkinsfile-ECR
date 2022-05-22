@@ -11,7 +11,7 @@ pipeline {
         ECR_SERVER = "954950917172.dkr.ecr.ap-southeast-1.amazonaws.com"
         AWS_DEFAULT_REGION = "ap-southeast-1"
         AWS_DEFAULT_PROFILE = "default"
-        DOMAIN_NAME = "tono.io"
+        DOMAIN_NAME = "sookyenfarm.com"
 
     }
     
@@ -154,20 +154,20 @@ EOF
         //     }
         // }
 
-        // stage('Check App') {
-        //     steps {
-        //         echo 'Check App'
-        //         sh '''
-        //             sleep 30
-        //             # AWS ELB 
-        //             #STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://$ELB_ENDPOINT)
+        stage('Check App') {
+            steps {
+                echo 'Check App'
+                sh '''
+                    sleep 30
+                    # AWS ELB 
+                    #STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://$ELB_ENDPOINT)
 
-        //             # Service
-        //             STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://${APP_NAME}-${DEV_PROJECT}.${DOMAIN_NAME})
-        //             if test $STATUSCODE -ne 200; then echo ERROR:$STATUSCODE && exit 1; else echo SUCCESS; fi;
-        //         '''
-        //     }
-        // }
+                    # Service
+                    STATUSCODE=$(curl -s -o /dev/null -I -w "%{http_code}" http://${APP_NAME}-${DEV_PROJECT}.${DOMAIN_NAME})
+                    if test $STATUSCODE -ne 200; then echo ERROR:$STATUSCODE && exit 1; else echo SUCCESS; fi;
+                '''
+            }
+        }
 
     }
 }
