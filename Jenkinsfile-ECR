@@ -9,6 +9,8 @@ pipeline {
         DEV_PROJECT = "dev"
         SQ_SERVER = "https://sq.tono.io"
         ECR_SERVER = "954950917172.dkr.ecr.ap-southeast-1.amazonaws.com"
+        AWS_DEFAULT_REGION = "ap-southeast-1"
+        AWS_DEFAULT_PROFILE = "default"
         DOMAIN_NAME = "tono.io"
 
     }
@@ -53,6 +55,15 @@ pipeline {
         //     }
         // }
 
+        stage('Logging into AWS ECR') {
+            steps {
+                echo "Logging into AWS ECR"
+                sh '''
+                    aws ecr get-login-password --region ${AWS_DEFAULT_REGION} --profile ${AWS_DEFAULT_PROFILE}| docker login --username AWS --password-stdin ${ECR_SERVER}
+                '''  
+            }
+        }
+
         stage('Build Docker Images') {
             steps {
                 echo 'Build Docker Images'
@@ -65,19 +76,13 @@ pipeline {
         stage('Push Images to Artifactory') {
             steps {
                 echo 'Push Images to Artifactory'
-                withCredentials([usernamePassword(credentialsId: 'sds-nexus', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh '''
-                        # Docker Login Push/Pull
-                        echo docker login to ${ECR_SERVER}
-                        docker login ${ECR_SERVER} -u $DOCKER_USER -p $DOCKER_PASSWORD 
-            
-                        # Docker Tag
-                        docker tag ${ECR_SERVER}/${APP_NAME}:latest ${ECR_SERVER}/${APP_NAME}:latest
+                sh '''
+                    # Docker Tag
+                    docker tag ${ECR_SERVER}/${APP_NAME}:latest ${ECR_SERVER}/${APP_NAME}:latest
 
-                        # Docker Push
-                        docker push ${ECR_SERVER}/${APP_NAME}:latest
-                    '''
-                }
+                    # Docker Push
+                    docker push ${ECR_SERVER}/${APP_NAME}:latest
+                '''
             }
         }
 
