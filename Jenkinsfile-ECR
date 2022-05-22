@@ -8,7 +8,7 @@ pipeline {
         APP_PORT = "3000"
         DEV_PROJECT = "dev"
         SQ_SERVER = "https://sq.tono.io"
-        ECR_SERVER = "954950917172.dkr.ecr.ap-southeast-1.amazonaws.com"
+        ECR_SERVER = "211060186263.dkr.ecr.ap-southeast-1.amazonaws.com"
         AWS_DEFAULT_REGION = "ap-southeast-1"
         AWS_DEFAULT_PROFILE = "default"
         DOMAIN_NAME = "sookyenfarm.com"
