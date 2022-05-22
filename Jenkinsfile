@@ -40,20 +40,20 @@ pipeline {
             }
         }
 
-        stage('Source Code Scan') {
-            steps {
-                echo 'Source Code Scan SonarQube'
-                withCredentials([string(credentialsId: 'sq-token', variable: 'SQ_TOKEN')]) {
-                    sh '''
-                        sonar-scanner \
-                        -Dsonar.projectKey="${APP_NAME}" \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url="${SQ_SERVER}" \
-                        -Dsonar.login="$SQ_TOKEN"
-                    '''
-                }
-            }
-        }
+        // stage('Source Code Scan') {
+        //     steps {
+        //         echo 'Source Code Scan SonarQube'
+        //         withCredentials([string(credentialsId: 'sq-token', variable: 'SQ_TOKEN')]) {
+        //             sh '''
+        //                 sonar-scanner \
+        //                 -Dsonar.projectKey="${APP_NAME}" \
+        //                 -Dsonar.sources=. \
+        //                 -Dsonar.host.url="${SQ_SERVER}" \
+        //                 -Dsonar.login="$SQ_TOKEN"
+        //             '''
+        //         }
+        //     }
+        // }
 
         stage('Build Docker Images') {
             steps {
